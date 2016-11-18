@@ -15,7 +15,7 @@
   apt_repository: repo="{{ virtualbox_repo }}" state=present mode="0644"
   tags: virtualbox
 
-- name: install virtualbox
+- name: install virtualbox {{ virtualbox_version }}
   become: yes
   apt: name="{{ virtualbox_pkg_name }}" state=present update_cache=yes
   tags: virtualbox
