@@ -7,10 +7,7 @@
       - name: ansible_test_virtualbox_1204
         image: "chrismeyers/ubuntu12.04"
       - name: ansible_test_virtualbox_1404
-        image: "ubuntu-upstart:14.04" 
-      - name: ansible_test_virtualbox_1604
-        image: "ubuntu:16.04"      
-
+        image: "ubuntu-upstart:14.04"      
   roles:
     - role: provision_docker
       provision_docker_inventory: "{{ inventory }}"
