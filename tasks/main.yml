@@ -1,13 +1,14 @@
 ---
 # tasks file for virtualbox: main.yml
-- name: Ubuntu
-  include: ubuntu.yml
-  when: ansible_distribution == "Ubuntu" and {{ ansible_distribution_version.split(".")[0] }}|int >= 12
-
-- name: not Ubuntu
+- name: check if Ubuntu
   fail: msg="role ansible-virtualbox only supports ubuntu and ubuntu version >= 12"
   when: ansible_distribution != "Ubuntu"
 
-- name: needs 12.04 or more
-  fail: msg="role ansible-virtualbox only supports ubuntu and ubuntu version >= 12"
+- name: version 12.04 or above
+  fail: msg="role ansible-virtualbox only supports ubuntu version >= 12"
   when: ansible_distribution == "Ubuntu" and {{ ansible_distribution_version.split(".")[0] }}|int < 12
+
+- name: Ubuntu
+  include: ubuntu.yml
+  when: ansible_distribution == "Ubuntu" and {{ ansible_distribution_version.split(".")[0] }}|int >= 12
+...

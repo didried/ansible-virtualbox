@@ -1,6 +1,6 @@
 ---
 sudo: required
-dist: trusty
+dist: xenial
 language: python
 python:
   - "2.7"
@@ -39,16 +39,13 @@ script:
   # Run the role/playbook with ansible-playbook.
   - >
     ansible-playbook -i tests/inventory tests/main.yml
-    --connection=local --sudo  
+    --connection=local --become  
 
   # Run the role/playbook again, checking to make sure it's idempotent.
   - >
     ansible-playbook -i tests/inventory tests/main.yml
-    --connection=local --sudo
+    --connection=local --become
     | grep -q 'changed=[0].*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)  
-
-notifications:
-  # notify ansible galaxy of test results
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+...

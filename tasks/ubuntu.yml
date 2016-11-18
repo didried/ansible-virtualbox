@@ -1,5 +1,10 @@
 ---
 # tasks file for virtualbox: ubuntu.yml
+- name: use new key for Ubuntu 16.04 and above
+  set_fact:
+    virtualbox_key_url: "{{ virtualbox_key_url_2016 }}"
+  when: "{{ ansible_distribution_version.split('.')[0] }}|int >= 16"
+
 - name: add virtualbox oracle apt key
   become: yes
   apt_key: url="{{ virtualbox_key_url }}" state=present
@@ -20,3 +25,4 @@
   apt: name="{{ virtualbox_dkms_pkg_name }}" state=present
   when: virtualbox_install_dkms
   tags: virtualbox_dkms
+...
