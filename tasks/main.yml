@@ -6,9 +6,9 @@
 
 - name: version 12.04 or above
   fail: msg="role ansible-virtualbox only supports ubuntu version >= 12"
-  when: ansible_distribution == "Ubuntu" and {{ ansible_distribution_version.split(".")[0] }}|int < 12
+  when: 'ansible_distribution == "Ubuntu" and ansible_distribution_version.split(".")[0] | int < 12'
 
 - name: Ubuntu
   include: ubuntu.yml
-  when: ansible_distribution == "Ubuntu" and {{ ansible_distribution_version.split(".")[0] }}|int >= 12
+  when: 'ansible_distribution == "Ubuntu" and ansible_distribution_version.split(".")[0] | int >= 12'
 ...
